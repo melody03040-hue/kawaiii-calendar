@@ -7,11 +7,106 @@
 <title>我的精緻兔兔行事曆</title>
 
 <style>
-/* ===== 精緻可愛插圖素材 ===== */
-.kawaii-decor{
-  background-image:url('kawaii-decor.png.png');
+/* ===== 精緻兔兔獨立 PNG 素材 ===== */
+
+.decor-img{
+  position:absolute;
+  display:block;
   background-repeat:no-repeat;
-  background-size:100% auto;
+  background-position:center;
+  background-size:contain;
+  pointer-events:none;
+  z-index:5;
+}
+
+/* 兔兔 */
+.decor-bunny{
+  background-image:url('bunny.png');
+}
+
+.decor-bunny2{
+  background-image:url('bunny2.png');
+}
+
+.decor-bunny3{
+  background-image:url('bunny3.png');
+}
+
+/* 花朵 */
+.decor-flower{
+  background-image:url('flower.png');
+}
+/* 月曆右上角精緻小花 */
+.panel-flower{
+  position:absolute;
+  right:-4px;
+  top:8px;
+  width:58px;
+  height:58px;
+  z-index:5;
+  pointer-events:none;
+  background-size:contain;
+  background-position:center;
+  background-repeat:no-repeat;
+  filter:drop-shadow(0 4px 7px rgba(218,150,170,.15));
+}
+.decor-flower2{
+  background-image:url('flower2.png');
+}
+
+.decor-flower3{
+  background-image:url('flower3.png');
+}
+
+.decor-blossom{
+  background-image:url('blossom.png');
+}
+
+/* 蝴蝶結 */
+.decor-bow{
+  background-image:url('bow.png');
+}
+
+.decor-ribbon{
+  background-image:url('ribbon.png');
+}
+
+.decor-ribbon-flower{
+  background-image:url('ribbon-flower.png');
+}
+
+/* 愛心與閃亮 */
+.decor-heart{
+  background-image:url('heart.png');
+}
+
+.decor-heart2{
+  background-image:url('heart2.png');
+}
+
+.decor-heart3{
+  background-image:url('heart3.png');
+}
+
+.decor-sparkle{
+  background-image:url('sparkle.png');
+}
+
+/* 其他花邊 */
+.decor-tulip{
+  background-image:url('tulip.png');
+}
+
+.decor-butterfly{
+  background-image:url('butterfly.png');
+}
+
+.decor-corner{
+  background-image:url('corner.png');
+}
+
+.decor-divider{
+  background-image:url('divider.png');
 }
   :root{
   --bg:#fff9f7;
@@ -510,7 +605,7 @@ button{
   <main id="calendar" class="view active">
 
     <section class="panel">
-     <span class="panel-flower"></span>
+    <span class="decor-img decor-flower panel-flower"></span>
       <div class="monthbar">
 
         <button class="round" id="prev">
