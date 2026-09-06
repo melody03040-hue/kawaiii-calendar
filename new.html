@@ -5,91 +5,690 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
 <meta name="theme-color" content="#fff8f6" />
 <title>我的可愛行事曆</title>
+
 <style>
-:root{--bg:#fff9f7;--card:#fff;--ink:#5b4949;--muted:#aa9494;--pink:#f58aaa;--pink2:#ffd9e3;--line:#f2dfdf;--shadow:0 12px 30px rgba(179,119,132,.12)}
-*{box-sizing:border-box}body{margin:0;background:linear-gradient(#fff8f6,#fffdfc);font-family:-apple-system,BlinkMacSystemFont,"PingFang TC","Noto Sans TC",sans-serif;color:var(--ink)}button{font:inherit;color:inherit}
-.app{max-width:430px;margin:auto;min-height:100vh;padding:18px 16px 104px}.hero{position:relative;min-height:182px;border:1px solid #f8e8e8;border-radius:30px;background:linear-gradient(145deg,#fffefe,#fff0f4);box-shadow:var(--shadow);overflow:hidden;padding:25px 20px}.hero h1{font-size:31px;margin:0 0 8px;font-weight:900;letter-spacing:1px}.hero p{margin:0;color:var(--muted);font-size:15px}.spark{position:absolute;color:#f6a8bb;font-size:18px}.s1{left:24px;bottom:28px}.s2{left:58px;bottom:18px}.s3{right:154px;top:30px}
-/* 精緻素材表：使用既有 GitHub 圖檔作 CSS sprite */
-.sprite{background-image:url('4C68414D-BC66-4980-950C-E743E65CF8DB.png')!important;background-size:cover;background-position:center;background-repeat:no-repeat;}
+:root{
+  --bg:#fff9f7;
+  --card:#ffffff;
+  --ink:#5b4949;
+  --muted:#a99292;
+  --pink:#f49bb3;
+  --pink2:#ffe3ea;
+  --line:#f2dddd;
+  --shadow:0 12px 30px rgba(179,119,132,.12);
+}
 
-.hero-bunny{
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  background:linear-gradient(#fff8f6,#fffdfc);
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang TC","Noto Sans TC",sans-serif;
+  color:var(--ink);
+}
+
+button{
+  font:inherit;
+  color:inherit;
+}
+
+.app{
+  max-width:430px;
+  margin:auto;
+  min-height:100vh;
+  padding:18px 16px 104px;
+}
+
+/* ===== 精緻兔兔首頁橫幅 ===== */
+.hero{
+  width:100%;
+  aspect-ratio:1024/430;
+  border:1px solid #f8e8e8;
+  border-radius:30px;
+  background-image:url('IMG_6464.png');
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+  box-shadow:var(--shadow);
+  overflow:hidden;
+}
+
+/* ===== 上方功能分頁 ===== */
+.tabs{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:9px;
+  margin:16px 0;
+}
+
+.tab{
+  border:0;
+  background:#fff;
+  border-radius:19px;
+  padding:12px 5px;
+  box-shadow:0 5px 16px rgba(175,130,139,.08);
+  font-weight:800;
+  font-size:14px;
+}
+
+.tab.active{
+  background:#f4a4b8;
+  color:#fff;
+}
+
+.tab .icon{
+  display:block;
+  font-size:19px;
+  margin-bottom:2px;
+}
+
+/* ===== 主要卡片 ===== */
+.panel{
+  background:#fff;
+  border:1px solid #f7e7e7;
+  border-radius:30px;
+  padding:18px 14px;
+  box-shadow:var(--shadow);
+}
+
+.monthbar{
+  display:grid;
+  grid-template-columns:50px 1fr 58px 50px;
+  gap:7px;
+  align-items:center;
+  margin-bottom:15px;
+}
+
+.monthbar h2{
+  text-align:center;
+  margin:0;
+  font-size:27px;
+  white-space:nowrap;
+}
+
+.round{
+  height:48px;
+  border:0;
+  border-radius:17px;
+  background:#fff0f4;
+  font-weight:900;
+  font-size:20px;
+}
+
+.today{
+  font-size:14px;
+}
+
+.weekdays,
+.calendar{
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  gap:6px;
+}
+
+.weekdays div{
+  text-align:center;
+  color:#9f8d8d;
+  font-size:13px;
+  padding:5px 0 8px;
+}
+
+.day{
+  min-height:54px;
+  border:1px solid #f2e1e1;
+  border-radius:16px;
+  background:#fff;
+  display:flex;
+  align-items:flex-start;
+  justify-content:flex-start;
+  padding:8px;
+  font-weight:800;
+  position:relative;
+}
+
+.day.muted{
+  color:#c9baba;
+  background:#fffafa;
+}
+
+.day.todaymark{
+  border:2px solid #ef9bb0;
+  background:#fff1f5;
+}
+
+.day.todaymark:after{
+  content:"";
   position:absolute;
-  right:18px;
-  bottom:14px;
-  width:90px;
-  height:90px;
+  left:50%;
+  bottom:5px;
+  width:7px;
+  height:7px;
+  background:#ee91a8;
+  border-radius:50%;
+  transform:translateX(-50%);
+}
+
+/* ===== 今天想記什麼 ===== */
+.quick-title{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin:18px 2px 10px;
+}
+
+.quick-title h3{
+  margin:0;
+  font-size:17px;
+}
+
+.decor{
+  color:#e99ab1;
+  letter-spacing:4px;
+  font-size:18px;
+}
+
+.quick{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:9px;
+}
+
+.chip{
+  border:1px solid #f3e3e3;
+  border-radius:16px;
+  padding:11px 4px;
+  text-align:center;
+  font-size:13px;
+  font-weight:800;
+}
+
+.chip .dot{
+  display:block;
+  width:12px;
+  height:12px;
+  margin:0 auto 7px;
+  border-radius:50%;
+}
+
+.c1{
+  background:#eef8ff;
+}
+.c1 .dot{
+  background:#8ec7ef;
+}
+
+.c2{
+  background:#fff0f4;
+}
+.c2 .dot{
+  background:#ef9bb0;
+}
+
+.c3{
+  background:#fff8df;
+}
+.c3 .dot{
+  background:#f4c96b;
+}
+
+.c4{
+  background:#effaf0;
+}
+.c4 .dot{
+  background:#8acb96;
+}
+
+.c5{
+  background:#f7efff;
+}
+.c5 .dot{
+  background:#b99ade;
+}
+
+.c6{
+  background:#fff3eb;
+}
+.c6 .dot{
+  background:#d5a58a;
+}
+
+.note{
+  margin-top:14px;
+  background:#fff4f6;
+  border-radius:18px;
+  padding:12px 14px;
+  color:#8f7474;
+  font-size:13px;
+  line-height:1.6;
+}
+
+/* ===== 其他頁面 ===== */
+.view{
+  display:none;
+}
+
+.view.active{
+  display:block;
+}
+
+.empty{
+  padding:35px 18px;
+  text-align:center;
+  color:#9e8989;
+}
+
+.empty h2{
+  color:#655050;
+  margin-top:0;
+}
+
+.soft-box{
+  margin:18px auto 0;
+  max-width:260px;
+  border-radius:24px;
+  background:linear-gradient(145deg,#fff7f9,#ffedf2);
+  padding:22px;
+  border:1px solid #f7e1e7;
+}
+
+.settings-card{
+  background:#fff;
+  border:1px solid #f2e1e1;
+  border-radius:22px;
+  padding:16px;
+  margin-bottom:12px;
+}
+
+.settings-card strong{
+  display:block;
+  margin-bottom:5px;
+}
+
+/* ===== 底部導覽 ===== */
+.bottom{
+  position:fixed;
+  left:50%;
+  bottom:0;
+  transform:translateX(-50%);
+  width:min(430px,100%);
+  height:82px;
+  background:rgba(255,255,255,.96);
+  backdrop-filter:blur(12px);
+  border-top:1px solid #f4e1e1;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  z-index:9;
+  padding-bottom:env(safe-area-inset-bottom);
+}
+
+.nav{
+  border:0;
   background:transparent;
+  font-size:12px;
+  color:#8e7d7d;
+  font-weight:700;
 }
 
-.hero-bunny::before{
-  content:"🎀";
-  position:absolute;
-  font-size:72px;
-  line-height:1;
-  transform:rotate(-8deg);
-  filter:drop-shadow(0 5px 8px rgba(214,130,157,.18));
+.nav .icon{
+  display:block;
+  font-size:21px;
+  margin-bottom:2px;
 }
 
-.hero-bunny::after{
-  content:"♡";
-  position:absolute;
-  right:-5px;
-  top:-12px;
-  font-size:25px;
-  color:#ef9db7;
+.nav.active{
+  color:#e47f9a;
 }
-
-.bow{
-  background:none!important;
-}
-.tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin:16px 0}.tab{border:0;background:#fff;border-radius:19px;padding:12px 5px;box-shadow:0 5px 16px rgba(175,130,139,.08);font-weight:800;font-size:14px}.tab.active{background:#f4a4b8;color:#fff}.tab small{display:block;font-size:17px;margin-bottom:2px}
-.panel{background:#fff;border:1px solid #f7e7e7;border-radius:30px;padding:18px 14px;box-shadow:var(--shadow)}.monthbar{display:grid;grid-template-columns:50px 1fr 58px 50px;gap:7px;align-items:center;margin-bottom:15px}.monthbar h2{text-align:center;margin:0;font-size:27px;white-space:nowrap}.round{height:48px;border:0;border-radius:17px;background:#fff0f4;font-weight:900;font-size:20px}.today{font-size:14px}.weekdays,.calendar{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}.weekdays div{text-align:center;color:#9f8d8d;font-size:13px;padding:5px 0 8px}.day{min-height:54px;border:1px solid #f2e1e1;border-radius:16px;background:#fff;display:flex;align-items:flex-start;justify-content:flex-start;padding:8px;font-weight:800;position:relative}.day.muted{color:#c9baba;background:#fffafa}.day.todaymark{border:2px solid #ef9bb0;background:#fff1f5}.day.todaymark:after{content:"";position:absolute;left:50%;bottom:5px;width:7px;height:7px;background:#ee91a8;border-radius:50%;transform:translateX(-50%)}
-.quick-title{display:flex;align-items:center;justify-content:space-between;margin:18px 2px 10px}.quick-title h3{margin:0;font-size:17px}.mini-decor{display:flex;gap:4px;align-items:center}.mini-decor .sprite{transform:scale(.55);transform-origin:center;margin:-13px}
-.quick{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.chip{border:1px solid #f3e3e3;background:#fff;border-radius:16px;padding:10px 4px;text-align:center;font-size:13px;font-weight:800}.chip i{display:block;font-style:normal;font-size:21px;margin-bottom:3px}.c1{background:#eef8ff}.c2{background:#fff0f4}.c3{background:#fff8df}.c4{background:#effaf0}.c5{background:#f7efff}.c6{background:#fff3eb}
-.note{margin-top:14px;background:#fff4f6;border-radius:18px;padding:12px 14px;color:#8f7474;font-size:13px;line-height:1.6}.bottom{position:fixed;left:50%;bottom:0;transform:translateX(-50%);width:min(430px,100%);height:82px;background:rgba(255,255,255,.95);backdrop-filter:blur(12px);border-top:1px solid #f4e1e1;display:grid;grid-template-columns:repeat(4,1fr);z-index:9;padding-bottom:env(safe-area-inset-bottom)}.nav{border:0;background:transparent;font-size:12px;color:#8e7d7d;font-weight:700}.nav b{display:block;font-size:21px;margin-bottom:2px}.nav.active{color:#e47f9a}
-.view{display:none}.view.active{display:block}.empty{padding:35px 18px;text-align:center;color:#9e8989}.empty h2{color:#655050}.settings-card{background:#fff;border:1px solid #f2e1e1;border-radius:22px;padding:16px;margin-bottom:12px}.settings-card strong{display:block;margin-bottom:5px}
 </style>
 </head>
+
 <body>
+
 <div class="app">
-  <section class="hero">
-    <h1>我的行事曆 ♡</h1><p>把每一天，都過成喜歡的樣子</p>
-    <span class="spark s1">♡</span><span class="spark s2">· · ·</span><span class="spark s3">✦</span>
-    <div class="sprite hero-bunny" aria-label="精緻粉色兔兔"></div>
+
+  <section
+    class="hero"
+    aria-label="精緻粉色兔兔行事曆橫幅">
   </section>
 
   <div class="tabs">
-    <button class="tab active" data-view="calendar"><small>♡</small>月曆</button>
-    <button class="tab" data-view="today"><small>✦</small>今日</button>
-    <button class="tab" data-view="theme"><small>❀</small>主題</button>
-    <button class="tab" data-view="settings"><small>⋯</small>設定</button>
+    <button class="tab active" data-view="calendar">
+      <span class="icon">♡</span>
+      月曆
+    </button>
+
+    <button class="tab" data-view="today">
+      <span class="icon">✦</span>
+      今日
+    </button>
+
+    <button class="tab" data-view="theme">
+      <span class="icon">❀</span>
+      主題
+    </button>
+
+    <button class="tab" data-view="settings">
+      <span class="icon">⋯</span>
+      設定
+    </button>
   </div>
 
   <main id="calendar" class="view active">
+
     <section class="panel">
-      <div class="monthbar"><button class="round" id="prev">‹</button><h2 id="monthTitle"></h2><button class="round today" id="todayBtn">今天</button><button class="round" id="next">›</button></div>
-      <div class="weekdays"><div>日</div><div>一</div><div>二</div><div>三</div><div>四</div><div>五</div><div>六</div></div>
-      <div class="calendar" id="calendarGrid"></div>
+
+      <div class="monthbar">
+        <button class="round" id="prev">‹</button>
+
+        <h2 id="monthTitle"></h2>
+
+        <button class="round today" id="todayBtn">
+          今天
+        </button>
+
+        <button class="round" id="next">›</button>
+      </div>
+
+      <div class="weekdays">
+        <div>日</div>
+        <div>一</div>
+        <div>二</div>
+        <div>三</div>
+        <div>四</div>
+        <div>五</div>
+        <div>六</div>
+      </div>
+
+      <div
+        class="calendar"
+        id="calendarGrid">
+      </div>
+
     </section>
-    <div class="quick-title"><h3>今天想記什麼？</h3><div class="mini-decor"><span class="sprite heart"></span><span class="sprite bow"></span></div></div>
-    <div class="quick">
-      <div class="chip c1"><i>📖</i>上課</div><div class="chip c2"><i>▣</i>工作</div><div class="chip c3"><i>♕</i>生日</div>
-      <div class="chip c4"><i>✦</i>運動</div><div class="chip c5"><i>♡</i>生活</div><div class="chip c6"><i>☆</i>其他</div>
+
+    <div class="quick-title">
+      <h3>今天想記什麼？</h3>
+      <div class="decor">♡ ❀ ♡</div>
     </div>
-    <div class="note">♡ 精緻兔兔、蝴蝶結與花朵使用你 GitHub 裡已經上傳的固定素材圖，因此兔兔不會再因為手機 Emoji 或 CSS 重畫而變樣。</div>
+
+    <div class="quick">
+
+      <div class="chip c1">
+        <span class="dot"></span>
+        上課
+      </div>
+
+      <div class="chip c2">
+        <span class="dot"></span>
+        工作
+      </div>
+
+      <div class="chip c3">
+        <span class="dot"></span>
+        生日
+      </div>
+
+      <div class="chip c4">
+        <span class="dot"></span>
+        運動
+      </div>
+
+      <div class="chip c5">
+        <span class="dot"></span>
+        生活
+      </div>
+
+      <div class="chip c6">
+        <span class="dot"></span>
+        其他
+      </div>
+
+    </div>
+
+    <div class="note">
+      ♡ 首頁上方固定使用你上傳的精緻兔兔圖片 IMG_6464.png，
+      不再使用 CSS 裁切素材表，也不會再只顯示蝴蝶結。
+    </div>
+
   </main>
 
-  <main id="today" class="view"><section class="panel empty"><h2>今日 ♡</h2><p id="todayText"></p><div class="sprite flower" style="margin:18px auto"></div><p>把今天的小事，也好好收藏起來。</p></section></main>
-  <main id="theme" class="view"><section class="panel empty"><h2>粉色兔兔主題</h2><div class="sprite bow" style="margin:18px auto"></div><p>奶油粉、蝴蝶結、花朵與愛心，全部維持同一套精緻插畫風格。</p></section></main>
-  <main id="settings" class="view"><div class="settings-card"><strong>顯示設定</strong><span>目前使用：精緻粉色兔兔</span></div><div class="settings-card"><strong>資料</strong><span>新版測試頁，不會影響原本 index.html。</span></div></main>
+  <main id="today" class="view">
+
+    <section class="panel empty">
+
+      <h2>今日 ♡</h2>
+
+      <p id="todayText"></p>
+
+      <div class="soft-box">
+        把今天的小事，也好好收藏起來。
+      </div>
+
+    </section>
+
+  </main>
+
+  <main id="theme" class="view">
+
+    <section class="panel empty">
+
+      <h2>粉色兔兔主題</h2>
+
+      <div class="soft-box">
+        奶油粉、柔霧白、愛心與花朵，
+        全部維持同一套精緻可愛風格。
+      </div>
+
+    </section>
+
+  </main>
+
+  <main id="settings" class="view">
+
+    <div class="settings-card">
+      <strong>顯示設定</strong>
+      <span>目前使用：精緻粉色兔兔</span>
+    </div>
+
+    <div class="settings-card">
+      <strong>測試版本</strong>
+      <span>這是 new.html，不會影響原本 index.html。</span>
+    </div>
+
+  </main>
+
 </div>
-<nav class="bottom"><button class="nav active" data-view="calendar"><b>⌂</b>首頁</button><button class="nav" data-view="today"><b>✦</b>今日</button><button class="nav" data-view="theme"><b>❀</b>主題</button><button class="nav" data-view="settings"><b>⚙</b>設定</button></nav>
+
+<nav class="bottom">
+
+  <button class="nav active" data-view="calendar">
+    <span class="icon">⌂</span>
+    首頁
+  </button>
+
+  <button class="nav" data-view="today">
+    <span class="icon">✦</span>
+    今日
+  </button>
+
+  <button class="nav" data-view="theme">
+    <span class="icon">❀</span>
+    主題
+  </button>
+
+  <button class="nav" data-view="settings">
+    <span class="icon">⚙</span>
+    設定
+  </button>
+
+</nav>
+
 <script>
-let cursor=new Date();
-const grid=document.getElementById('calendarGrid'), title=document.getElementById('monthTitle');
-function render(){const y=cursor.getFullYear(),m=cursor.getMonth();title.textContent=`${y} 年 ${m+1} 月`;grid.innerHTML='';const first=new Date(y,m,1).getDay(),days=new Date(y,m+1,0).getDate(),prevDays=new Date(y,m,0).getDate();const now=new Date();for(let i=0;i<42;i++){let d,cls='day',dateObj;if(i<first){d=prevDays-first+i+1;cls+=' muted';dateObj=new Date(y,m-1,d)}else if(i>=first+days){d=i-first-days+1;cls+=' muted';dateObj=new Date(y,m+1,d)}else{d=i-first+1;dateObj=new Date(y,m,d)}if(dateObj.toDateString()===now.toDateString())cls+=' todaymark';const el=document.createElement('div');el.className=cls;el.textContent=d;grid.appendChild(el)}}
-document.getElementById('prev').onclick=()=>{cursor.setMonth(cursor.getMonth()-1);render()};document.getElementById('next').onclick=()=>{cursor.setMonth(cursor.getMonth()+1);render()};document.getElementById('todayBtn').onclick=()=>{cursor=new Date();render()};
-function switchView(id){document.querySelectorAll('.view').forEach(v=>v.classList.toggle('active',v.id===id));document.querySelectorAll('[data-view]').forEach(b=>b.classList.toggle('active',b.dataset.view===id))}document.querySelectorAll('[data-view]').forEach(b=>b.onclick=()=>switchView(b.dataset.view));
-const n=new Date();document.getElementById('todayText').textContent=`${n.getFullYear()} 年 ${n.getMonth()+1} 月 ${n.getDate()} 日`;render();
+let cursor = new Date();
+
+const grid =
+  document.getElementById('calendarGrid');
+
+const title =
+  document.getElementById('monthTitle');
+
+function render(){
+
+  const y =
+    cursor.getFullYear();
+
+  const m =
+    cursor.getMonth();
+
+  title.textContent =
+    `${y} 年 ${m + 1} 月`;
+
+  grid.innerHTML = '';
+
+  const first =
+    new Date(y, m, 1).getDay();
+
+  const days =
+    new Date(y, m + 1, 0).getDate();
+
+  const prevDays =
+    new Date(y, m, 0).getDate();
+
+  const now =
+    new Date();
+
+  for(let i = 0; i < 42; i++){
+
+    let d;
+    let cls = 'day';
+    let dateObj;
+
+    if(i < first){
+
+      d =
+        prevDays - first + i + 1;
+
+      cls += ' muted';
+
+      dateObj =
+        new Date(y, m - 1, d);
+
+    }else if(i >= first + days){
+
+      d =
+        i - first - days + 1;
+
+      cls += ' muted';
+
+      dateObj =
+        new Date(y, m + 1, d);
+
+    }else{
+
+      d =
+        i - first + 1;
+
+      dateObj =
+        new Date(y, m, d);
+    }
+
+    if(
+      dateObj.toDateString() ===
+      now.toDateString()
+    ){
+      cls += ' todaymark';
+    }
+
+    const el =
+      document.createElement('div');
+
+    el.className =
+      cls;
+
+    el.textContent =
+      d;
+
+    grid.appendChild(el);
+  }
+}
+
+document
+  .getElementById('prev')
+  .onclick = () => {
+
+    cursor.setMonth(
+      cursor.getMonth() - 1
+    );
+
+    render();
+};
+
+document
+  .getElementById('next')
+  .onclick = () => {
+
+    cursor.setMonth(
+      cursor.getMonth() + 1
+    );
+
+    render();
+};
+
+document
+  .getElementById('todayBtn')
+  .onclick = () => {
+
+    cursor =
+      new Date();
+
+    render();
+};
+
+function switchView(id){
+
+  document
+    .querySelectorAll('.view')
+    .forEach(v => {
+
+      v.classList.toggle(
+        'active',
+        v.id === id
+      );
+
+    });
+
+  document
+    .querySelectorAll('[data-view]')
+    .forEach(b => {
+
+      b.classList.toggle(
+        'active',
+        b.dataset.view === id
+      );
+
+    });
+}
+
+document
+  .querySelectorAll('[data-view]')
+  .forEach(b => {
+
+    b.onclick = () =>
+      switchView(
+        b.dataset.view
+      );
+
+  });
+
+const n =
+  new Date();
+
+document
+  .getElementById('todayText')
+  .textContent =
+    `${n.getFullYear()} 年 ${n.getMonth() + 1} 月 ${n.getDate()} 日`;
+
+render();
 </script>
-</body></html>
+
+</body>
+</html>
