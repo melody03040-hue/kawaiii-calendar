@@ -177,7 +177,23 @@ button{
   font-size:13px;
   letter-spacing:4px;
 }
+/* ===== 月曆右上精緻小花 ===== */
+.panel-flower{
+  position:absolute;
+  right:-4px;
+  top:8px;
+  width:58px;
+  height:58px;
+  z-index:5;
+  pointer-events:none;
 
+  background-image:url('kawaii-decor.png.png');
+  background-repeat:no-repeat;
+  background-size:1200% auto;
+  background-position:67% 39%;
+
+  filter:drop-shadow(0 4px 7px rgba(218,150,170,.15));
+}
 .monthbar{
   display:grid;
   grid-template-columns:50px 1fr 58px 50px;
@@ -494,7 +510,7 @@ button{
   <main id="calendar" class="view active">
 
     <section class="panel">
-
+     <span class="panel-flower"></span>
       <div class="monthbar">
 
         <button class="round" id="prev">
