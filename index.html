@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#fff8f5">
+<title>我的可愛行事曆</title>
+<style>
+:root{--bg:#fff8f5;--card:#fff;--main:#f39aaa;--soft:#ffe9ee;--text:#4a4140;--sub:#9b8c87;--border:#efe3df;--font:-apple-system,BlinkMacSystemFont,"PingFang TC","Microsoft JhengHei",sans-serif}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font)}button,input,select,textarea{font:inherit}.app{max-width:760px;margin:auto;padding-bottom:90px}.hero{padding:26px 18px 18px;background:linear-gradient(180deg,var(--soft),transparent);border-radius:0 0 30px 30px}.hero-inner{display:flex;justify-content:space-between;align-items:center;gap:16px}.hero h1{margin:0;font-size:28px}.hero p{color:var(--sub);margin:8px 0 0}.mascot{width:86px;height:86px;border-radius:28px;background:var(--card);display:grid;place-items:center;font-size:42px;box-shadow:0 10px 28px rgba(0,0,0,.08)}
+.tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:14px 16px}.tab{border:0;border-radius:16px;padding:11px 6px;background:var(--card);color:var(--sub);font-weight:700}.tab.active{background:var(--main);color:#fff}.panel{margin:14px 16px;background:var(--card);border-radius:24px;padding:17px;box-shadow:0 10px 28px rgba(0,0,0,.07)}
+.monthbar,.section-head{display:flex;align-items:center;justify-content:space-between;gap:10px}.monthbar h2,.section-head h3{margin:0}.iconbtn,.add,.todaybtn{border:0;border-radius:14px;padding:10px 12px;background:var(--soft);color:var(--text);font-weight:800}.iconbtn{width:42px;height:42px;font-size:21px}.weekdays,.calendar{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}.weekdays{margin:14px 0 7px}.weekdays div{text-align:center;color:var(--sub);font-size:12px}.day{min-height:62px;border:1px solid var(--border);border-radius:15px;background:#fff;padding:7px;position:relative;text-align:left}.day.other{opacity:.28}.day.today{outline:2px solid var(--main)}.day.selected{background:var(--soft)}.day-num{font-weight:700}.dots{position:absolute;bottom:7px;left:7px;right:7px;display:flex;justify-content:center;gap:4px}.dot{width:6px;height:6px;border-radius:50%}
+.task{border:1px solid var(--border);border-radius:18px;padding:13px;margin-top:10px;background:linear-gradient(90deg,var(--task-soft,#fff),#fff)}.task.done{opacity:.6}.task-row{display:flex;gap:10px}.check{width:25px;height:25px;border-radius:8px;border:2px solid var(--main);background:#fff;color:#fff}.task.done .check{background:var(--main)}.task-main{flex:1}.task-title{font-weight:800}.task-meta,.task-note{font-size:13px;color:var(--sub);margin-top:4px;line-height:1.45}.task-actions{display:flex;gap:8px;margin-top:9px}.mini{border:0;border-radius:10px;padding:7px 10px;background:#f5f2f0}.empty{text-align:center;color:var(--sub);padding:24px}
+.quick-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:8px}.quick{border:0;border-radius:16px;padding:10px 4px;background:var(--soft);color:var(--text)}.quick span{display:block;font-size:23px}.theme-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.theme-card{border:2px solid transparent;border-radius:18px;padding:13px;background:#fff;text-align:left}.theme-card.active{border-color:var(--main)}.theme-preview{height:62px;border-radius:14px;display:grid;place-items:center;font-size:30px;margin-bottom:8px}.theme-name{font-weight:800}.theme-sub{font-size:12px;color:var(--sub);margin-top:3px}
+.setting-row{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:12px 0}.setting-row select{max-width:180px}.secondary{width:100%;border:0;border-radius:14px;background:#f5f2f0;padding:12px;font-weight:700}
+.sheet-wrap{position:fixed;inset:0;background:rgba(0,0,0,.25);display:none;align-items:flex-end;justify-content:center;z-index:50}.sheet-wrap.show{display:flex}.sheet{width:min(760px,100%);max-height:90vh;overflow:auto;background:var(--card);border-radius:28px 28px 0 0;padding:18px 18px calc(24px + env(safe-area-inset-bottom))}.sheet h3{margin:0}.handle{width:50px;height:5px;background:#ddd;border-radius:99px;margin:0 auto 14px}label{display:block;font-size:13px;font-weight:800;margin:12px 0 6px}input,select,textarea{width:100%;border:1px solid var(--border);border-radius:14px;padding:12px;background:#fff;color:var(--text)}textarea{min-height:80px}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.sticker-grid{display:grid;grid-template-columns:repeat(8,1fr);gap:7px;margin-top:8px}.sticker-btn{border:1px solid var(--border);border-radius:12px;background:#fff;padding:7px;font-size:21px}.sticker-btn.selected{background:var(--soft);border-color:var(--main)}.color-grid{display:flex;gap:9px;flex-wrap:wrap}.color-btn{width:30px;height:30px;border-radius:50%;border:3px solid #fff;box-shadow:0 0 0 1px #ddd}.color-btn.selected{box-shadow:0 0 0 3px var(--main)}.primary{width:100%;border:0;border-radius:15px;background:var(--main);color:#fff;padding:14px;font-weight:800;margin-top:16px}
+.bottomnav{position:fixed;left:0;right:0;bottom:0;background:rgba(255,255,255,.94);backdrop-filter:blur(12px);display:grid;grid-template-columns:repeat(4,1fr);padding:8px 8px calc(8px + env(safe-area-inset-bottom));border-top:1px solid var(--border);z-index:40}.navbtn{border:0;background:none;color:#8f8580;font-size:12px}.navbtn span{display:block;font-size:20px}.navbtn.active{color:var(--main);font-weight:800}.view{display:none}.view.active{display:block}
+@media(max-width:420px){.quick-grid{grid-template-columns:repeat(3,1fr)}.sticker-grid{grid-template-columns:repeat(6,1fr)}.day{min-height:58px}}
+</style>
+</head>
+<body>
+<div class="app">
+<section class="hero"><div class="hero-inner"><div><h1>我的行事曆 ♡</h1><p>把每一天，都過成喜歡的樣子</p></div><div class="mascot" id="mascot">🐰💗</div></div></section>
+<div class="tabs">
+<button class="tab active" data-view="calendarView">📅 月曆</button>
+<button class="tab" data-view="todayView">☀️ 今日</button>
+<button class="tab" data-view="themeView">🎨 主題</button>
+<button class="tab" data-view="settingsView">⚙️ 設定</button>
+</div>
+
+<main id="calendarView" class="view active">
+<section class="panel">
+<div class="monthbar"><button class="iconbtn" id="prevMonth">‹</button><h2 id="monthTitle"></h2><div><button class="todaybtn" id="todayBtn">今天</button><button class="iconbtn" id="nextMonth">›</button></div></div>
+<div class="weekdays"><div>日</div><div>一</div><div>二</div><div>三</div><div>四</div><div>五</div><div>六</div></div>
+<div class="calendar" id="calendar"></div>
+</section>
+<section class="panel"><div class="section-head"><h3 id="selectedDateTitle">今日事項</h3><button class="add" id="addBtn">＋ 新增</button></div><div id="taskList"></div></section>
+<section class="panel"><div class="section-head"><h3>✨ 快速新增</h3></div><div class="quick-grid">
+<button class="quick" data-cat="上課" data-icon="📚"><span>📚</span>上課</button><button class="quick" data-cat="工作" data-icon="💼"><span>💼</span>工作</button><button class="quick" data-cat="生日" data-icon="🎂"><span>🎂</span>生日</button><button class="quick" data-cat="運動" data-icon="🏃"><span>🏃</span>運動</button><button class="quick" data-cat="生活" data-icon="☕"><span>☕</span>生活</button><button class="quick" data-cat="其他" data-icon="⭐"><span>⭐</span>其他</button>
+</div></section>
+</main>
+
+<main id="todayView" class="view"><section class="panel"><div class="section-head"><h3>☀️ 今天</h3><button class="add" id="todayAddBtn">＋ 新增</button></div><div id="todayTaskList"></div></section></main>
+<main id="themeView" class="view"><section class="panel"><div class="section-head"><h3>🎨 主題風格</h3></div><div class="theme-grid" id="themeGrid"></div></section></main>
+<main id="settingsView" class="view"><section class="panel"><div class="section-head"><h3>⚙️ 個人化</h3></div><div class="setting-row"><div><b>字體風格</b><div class="task-meta">可自由切換</div></div><select id="fontSelect"><option value="system">可愛圓體</option><option value="serif">日系手帳感</option><option value="mono">簡約打字機</option></select></div><button class="secondary" id="clearAllBtn">清除所有行事資料</button></section></main>
+</div>
+
+<nav class="bottomnav"><button class="navbtn active" data-view="calendarView"><span>🏠</span>首頁</button><button class="navbtn" data-view="todayView"><span>☀️</span>今日</button><button class="navbtn" data-view="themeView"><span>🎨</span>主題</button><button class="navbtn" data-view="settingsView"><span>⚙️</span>設定</button></nav>
+
+<div class="sheet-wrap" id="sheetWrap"><div class="sheet"><div class="handle"></div><h3 id="sheetTitle">✨ 新增事項</h3>
+<label>事項名稱</label><input id="titleInput" placeholder="例如：數學複習">
+<div class="form-grid"><div><label>時間</label><input id="timeInput" type="time"></div><div><label>分類</label><select id="categoryInput"><option>上課</option><option>工作</option><option>生日</option><option>運動</option><option>生活</option><option>其他</option></select></div></div>
+<label>可愛小圖案</label><div class="sticker-grid" id="stickerGrid"></div>
+<label>事項顏色</label><div class="color-grid" id="colorGrid"></div>
+<label>備註</label><textarea id="noteInput" placeholder="寫下提醒或想記住的事情…"></textarea>
+<button class="primary" id="saveBtn">儲存事項</button><button class="secondary" id="cancelBtn" style="margin-top:8px">取消</button>
+</div></div>
+
+<script>
+const themes={
+rabbit:{name:"粉嫩兔兔",sub:"草莓牛奶粉",mascot:"🐰💗",bg:"#fff8f5",main:"#f39aaa",soft:"#ffe9ee",text:"#4a4140",subc:"#9b8c87"},
+bear:{name:"奶茶小熊",sub:"溫柔燕麥奶茶",mascot:"🧸🍪",bg:"#fbf6ef",main:"#c99b78",soft:"#f2e5d8",text:"#4f4036",subc:"#9b8778"},
+cat:{name:"天空小貓",sub:"晴空雲朵藍",mascot:"🐱☁️",bg:"#f4f9ff",main:"#87bde8",soft:"#e2f1fd",text:"#3e4852",subc:"#8594a0"},
+panda:{name:"薰衣草熊貓",sub:"夢幻薰衣草紫",mascot:"🐼💜",bg:"#faf7ff",main:"#b8a1dd",soft:"#eee7fa",text:"#45404d",subc:"#92899d"},
+strawberry:{name:"草莓甜心",sub:"粉嫩莓果紅",mascot:"🍓🎀",bg:"#fff6f7",main:"#e98397",soft:"#ffe5ea",text:"#4b4042",subc:"#987f84"},
+moon:{name:"星空夢境",sub:"晚安星星紫藍",mascot:"🌙⭐",bg:"#f5f4ff",main:"#7e86d9",soft:"#e6e8ff",text:"#41445b",subc:"#8589a7"}
+};
+const stickers=["🐰","🧸","🐱","🐼","🌷","🌸","⭐","🌙","💗","🎀","🍓","🧁","☁️","☀️","📚","✏️","💼","🎂","🏃","☕","🌱","🖥️","🎒","🍀"];
+const colors=["#f39aaa","#e98397","#f2b95f","#87bde8","#8cc9a4","#b8a1dd","#c99b78","#9fa7b3"];
+const $=id=>document.getElementById(id);
+let currentMonth=new Date(); currentMonth.setDate(1);
+let selectedDate=new Date();
+let tasks=JSON.parse(localStorage.getItem("kawaiiCalendarTasks")||"{}");
+let currentTheme=localStorage.getItem("kawaiiCalendarTheme")||"rabbit";
+let selectedSticker="🐰", selectedColor="#f39aaa", editing=null;
+
+function key(d){return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
+function save(){localStorage.setItem("kawaiiCalendarTasks",JSON.stringify(tasks))}
+function soft(hex){const n=parseInt(hex.slice(1),16),r=(n>>16)&255,g=(n>>8)&255,b=n&255;return `rgba(${r},${g},${b},.13)`}
+function esc(s=""){return s.replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]))}
+
+function applyTheme(name){currentTheme=name;const t=themes[name],r=document.documentElement.style;r.setProperty("--bg",t.bg);r.setProperty("--main",t.main);r.setProperty("--soft",t.soft);r.setProperty("--text",t.text);r.setProperty("--sub",t.subc);$("mascot").textContent=t.mascot;localStorage.setItem("kawaiiCalendarTheme",name);renderThemes()}
+function renderThemes(){$("themeGrid").innerHTML="";Object.entries(themes).forEach(([k,t])=>{const b=document.createElement("button");b.className="theme-card"+(k===currentTheme?" active":"");b.innerHTML=`<div class="theme-preview" style="background:${t.soft}">${t.mascot}</div><div class="theme-name">${t.name}</div><div class="theme-sub">${t.sub}</div>`;b.onclick=()=>applyTheme(k);$("themeGrid").appendChild(b)})}
+
+function renderCalendar(){const y=currentMonth.getFullYear(),m=currentMonth.getMonth();$("monthTitle").textContent=`${y} 年 ${m+1} 月`;$("calendar").innerHTML="";const start=new Date(y,m,1).getDay(),last=new Date(y,m+1,0).getDate(),prev=new Date(y,m,0).getDate();for(let i=start-1;i>=0;i--)addDay(new Date(y,m-1,prev-i),true);for(let d=1;d<=last;d++)addDay(new Date(y,m,d),false);const rem=(7-(start+last)%7)%7;for(let d=1;d<=rem;d++)addDay(new Date(y,m+1,d),true)}
+function addDay(date,other){const b=document.createElement("button");b.className="day"+(other?" other":"");if(date.toDateString()===new Date().toDateString())b.classList.add("today");if(date.toDateString()===selectedDate.toDateString())b.classList.add("selected");const arr=tasks[key(date)]||[];b.innerHTML=`<span class="day-num">${date.getDate()}</span>${arr.length?`<div class="dots">${arr.slice(0,3).map(t=>`<span class="dot" style="background:${t.color||'#f39aaa'}"></span>`).join("")}</div>`:""}`;b.onclick=()=>{selectedDate=new Date(date);if(other)currentMonth=new Date(date.getFullYear(),date.getMonth(),1);renderCalendar();renderTasks()};$("calendar").appendChild(b)}
+
+function renderTasks(){$("selectedDateTitle").textContent=`${selectedDate.getMonth()+1} 月 ${selectedDate.getDate()} 日事項`;renderList($("taskList"),key(selectedDate));renderList($("todayTaskList"),key(new Date()))}
+function renderList(el,k){const arr=tasks[k]||[];if(!arr.length){el.innerHTML='<div class="empty">今天還沒有事項 ♡<br>按「新增」記下第一件事吧！</div>';return}el.innerHTML="";arr.forEach((t,i)=>{const d=document.createElement("div");d.className="task"+(t.done?" done":"");d.style.setProperty("--task-soft",soft(t.color||"#f39aaa"));d.innerHTML=`<div class="task-row"><button class="check">${t.done?"✓":""}</button><div class="task-main"><div class="task-title">${t.icon||"⭐"} ${esc(t.title)}</div><div class="task-meta">${t.time||"未設定時間"} ・ ${esc(t.category||"其他")}</div>${t.note?`<div class="task-note">${esc(t.note)}</div>`:""}<div class="task-actions"><button class="mini edit">✏️ 修改</button><button class="mini del">🗑 刪除</button></div></div></div>`;d.querySelector(".check").onclick=()=>{t.done=!t.done;save();renderCalendar();renderTasks()};d.querySelector(".edit").onclick=()=>openSheet(k,i);d.querySelector(".del").onclick=()=>{if(confirm("確定要刪除這個事項嗎？")){arr.splice(i,1);if(!arr.length)delete tasks[k];save();renderCalendar();renderTasks()}};el.appendChild(d)})}
+
+function picker(){$("stickerGrid").innerHTML="";stickers.forEach(s=>{const b=document.createElement("button");b.className="sticker-btn"+(s===selectedSticker?" selected":"");b.textContent=s;b.onclick=()=>{selectedSticker=s;picker()};$("stickerGrid").appendChild(b)});$("colorGrid").innerHTML="";colors.forEach(c=>{const b=document.createElement("button");b.className="color-btn"+(c===selectedColor?" selected":"");b.style.background=c;b.onclick=()=>{selectedColor=c;picker()};$("colorGrid").appendChild(b)})}
+function openSheet(k=key(selectedDate),i=null,preset=null){editing=i===null?null:{k,i};$("sheetTitle").textContent=editing?"✏️ 修改事項":"✨ 新增事項";$("titleInput").value="";$("timeInput").value="";$("categoryInput").value=preset?.cat||"上課";$("noteInput").value="";selectedSticker=preset?.icon||"🐰";selectedColor=themes[currentTheme].main;if(editing){const t=tasks[k][i];$("titleInput").value=t.title;$("timeInput").value=t.time||"";$("categoryInput").value=t.category||"其他";$("noteInput").value=t.note||"";selectedSticker=t.icon||"⭐";selectedColor=t.color||themes[currentTheme].main}$("sheetWrap").dataset.key=k;picker();$("sheetWrap").classList.add("show")}
+function closeSheet(){$("sheetWrap").classList.remove("show");editing=null}
+function saveTask(){const title=$("titleInput").value.trim();if(!title){alert("請輸入事項名稱");return}const k=$("sheetWrap").dataset.key,item={title,time:$("timeInput").value,category:$("categoryInput").value,icon:selectedSticker,color:selectedColor,note:$("noteInput").value.trim(),done:false};if(editing){item.done=tasks[editing.k][editing.i].done||false;tasks[editing.k][editing.i]=item}else{if(!tasks[k])tasks[k]=[];tasks[k].push(item)}save();closeSheet();renderCalendar();renderTasks()}
+
+function switchView(id){document.querySelectorAll(".view").forEach(v=>v.classList.toggle("active",v.id===id));document.querySelectorAll(".tab,.navbtn").forEach(b=>b.classList.toggle("active",b.dataset.view===id));if(id==="todayView")renderTasks()}
+document.querySelectorAll(".tab,.navbtn").forEach(b=>b.onclick=()=>switchView(b.dataset.view));
+$("prevMonth").onclick=()=>{currentMonth=new Date(currentMonth.getFullYear(),currentMonth.getMonth()-1,1);renderCalendar()};
+$("nextMonth").onclick=()=>{currentMonth=new Date(currentMonth.getFullYear(),currentMonth.getMonth()+1,1);renderCalendar()};
+$("todayBtn").onclick=()=>{selectedDate=new Date();currentMonth=new Date(selectedDate.getFullYear(),selectedDate.getMonth(),1);renderCalendar();renderTasks()};
+$("addBtn").onclick=()=>openSheet();$("todayAddBtn").onclick=()=>{selectedDate=new Date();openSheet(key(selectedDate))};
+document.querySelectorAll(".quick").forEach(b=>b.onclick=()=>openSheet(key(selectedDate),null,{cat:b.dataset.cat,icon:b.dataset.icon}));
+$("saveBtn").onclick=saveTask;$("cancelBtn").onclick=closeSheet;$("sheetWrap").onclick=e=>{if(e.target===$("sheetWrap"))closeSheet()};
+$("clearAllBtn").onclick=()=>{if(confirm("確定要清除所有行事資料嗎？")){tasks={};save();renderCalendar();renderTasks()}};
+$("fontSelect").onchange=()=>{const v=$("fontSelect").value;let f='-apple-system,BlinkMacSystemFont,"PingFang TC","Microsoft JhengHei",sans-serif';if(v==="serif")f='"Noto Serif TC","Songti TC","PMingLiU",serif';if(v==="mono")f='"SFMono-Regular","Menlo","Courier New",monospace';document.documentElement.style.setProperty("--font",f);localStorage.setItem("kawaiiCalendarFont",v)};
+$("fontSelect").value=localStorage.getItem("kawaiiCalendarFont")||"system";$("fontSelect").dispatchEvent(new Event("change"));
+applyTheme(currentTheme);renderThemes();renderCalendar();renderTasks();
+</script>
+</body>
+</html>
